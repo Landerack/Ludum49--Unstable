@@ -5,7 +5,7 @@ using UnityEngine;
 namespace TMPro.EditorUtilities { 
 public class Scoreboard : MonoBehaviour
 {
-        public static bool gamedone = false;//set to true when the game is done ----- TODO
+        private bool gamedone = false;//set to true when the game is done ----- TODO
 
     [SerializeField] private TextMeshProUGUI timer;
     static float minutes = 0;
@@ -16,7 +16,7 @@ public class Scoreboard : MonoBehaviour
     void Update()
     {
         
-        if (miliseconds > 99)
+        if ((miliseconds > 99)&&(gamedone==false))
         {
             if (seconds > 59)
             {
@@ -38,7 +38,14 @@ public class Scoreboard : MonoBehaviour
         
 
         //Debug.Log(string.Format("{0}:{1}:{2}", minutes, seconds, (int)miliseconds));
-        timer.text = string.Format("{0}:{1}:{2}", minutes, seconds, (int)miliseconds);
-    }
+
+                timer.text = string.Format("{0}:{1}:{2}", minutes, seconds, (int)miliseconds);
+      
+        }
+
+        public void endGame()
+        {
+            gamedone = true;
+        }
 }
 }
