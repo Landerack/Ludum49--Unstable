@@ -2,37 +2,43 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace TMPro.EditorUtilities { 
 public class Scoreboard : MonoBehaviour
 {
+        public static bool gamedone = false;//set to true when the game is done ----- TODO
 
-    [SerializeField] private TextMesh timer;
-    float minutes = 5;
-    float seconds = 0;
-    float miliseconds = 0;
+    [SerializeField] private TextMeshProUGUI timer;
+    static float minutes = 0;
+    static float seconds = 0;
+    static float miliseconds = 0;
 
 
     void Update()
     {
-
-        if (miliseconds <= 0)
+        
+        if (miliseconds > 99)
         {
-            if (seconds <= 0)
+            if (seconds > 59)
             {
-                minutes--;
-                seconds = 59;
+                minutes++;
+                seconds = 00;
             }
-            else if (seconds >= 0)
+            else if (seconds <= 59)
             {
-                seconds--;
+                seconds++;
             }
 
-            miliseconds = 100;
+            miliseconds = 0;
         }
 
-        miliseconds -= Time.deltaTime * 100;
+        if(gamedone == false)
+            {
+                miliseconds += Time.deltaTime * 100;
+            }
+        
 
         //Debug.Log(string.Format("{0}:{1}:{2}", minutes, seconds, (int)miliseconds));
         timer.text = string.Format("{0}:{1}:{2}", minutes, seconds, (int)miliseconds);
     }
 }
-
+}

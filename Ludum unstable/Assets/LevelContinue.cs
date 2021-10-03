@@ -1,32 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelContinue : MonoBehaviour
 {
-   [SerializeField] private Rigidbody rig;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private static int currentlevel = 0;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    private int totalFinalists = 0;
+
+
+    [SerializeField] private Rigidbody rig;
+
+
 
     private void OnTriggerEnter(Collider other)
     {
+
         if (other.tag == "Player")
         {
             Debug.Log("Player finnished");
             other.gameObject.SetActive(false);
+            totalFinalists++;
             //next level load
 
             //eventually we'll want to note time
-            levelContinue();
+            if (totalFinalists == SavedData.PlayerLetters.Length) //per player letter there is one player. so this checks the total number of players
+            {
+                levelContinue();
+            }
         }
     }
   
@@ -34,7 +36,12 @@ public class LevelContinue : MonoBehaviour
 
     private void levelContinue()
     {
+        totalFinalists = 0;
+        currentlevel++;
+        Debug.Log("LevelContinue triggered");
         //if all players are done, go to next level.
+        SceneManager.LoadScene(currentlevel);
+
     }
 }
 
