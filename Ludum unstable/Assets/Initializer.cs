@@ -16,7 +16,7 @@ public class Initializer : MonoBehaviour
     public GameObject M;
 
     // Update is called once per frame
-    void Update()
+    void Awake()
     {
         if (SavedData.PlayerLetters.Contains("s")){ S.SetActive(true); }
         if (SavedData.PlayerLetters.Contains("b")){ B.SetActive(true); }

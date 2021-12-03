@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private Animator Anim;
     public KeyCode PlayerCode;
     [SerializeField] private Rigidbody Rig;
     [SerializeField] private float Boost;
@@ -18,7 +19,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(PlayerCode))
         {
+            
             Rig.AddForce(transform.up * 100 * Boost);
+
+            Anim.SetTrigger("Boing");
         }
     }
 }

@@ -7,26 +7,26 @@ public class LevelContinue : MonoBehaviour
 {
     private static int currentlevel = 0;
 
-    private int totalFinalists = 0;
+    private static int totalFinalists = 0;
 
+    private GameObject last;
 
     [SerializeField] private Rigidbody rig;
 
 
-
     private void OnTriggerEnter(Collider other)
     {
-
         if (other.tag == "Player")
         {
-            Debug.Log("Player finnished");
-            other.gameObject.SetActive(false);
+            Debug.Log(other + " Player finnished");
+            other.gameObject.SetActive(false);           
             totalFinalists++;
             //next level load
 
             //eventually we'll want to note time
             if (totalFinalists == SavedData.PlayerLetters.Length) //per player letter there is one player. so this checks the total number of players
             {
+                Debug.Log(totalFinalists);
                 levelContinue();
             }
         }
